@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.zhangyuhao.dao.ArticleMapper">
+  
+  <select id="list" resultType="com.zhangyuhao.entity.Article">
+  
+  	select id,title,content,picture,hot,status,created,updated from cms_article
+  	
+  	<where>
+  	 <if test="dt1!=null and dt1!='' ">
+  	 	created >= #{dt1}
+  	 </if>
+  	 <if test="dt2!=null and dt2 !='' ">
+  	 	and created &lt;=#{dt2} 
+  	 </if>
+  	 
+  	</where>
+  		<if test="select ==null or select =='1'">
+  			order by created
+  		</if>
+  		<if test="select =='2'">
+  			order by created desc
+  		</if>
+  </select>
+  </mapper>
